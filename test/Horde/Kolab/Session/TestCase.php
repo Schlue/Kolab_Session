@@ -23,37 +23,40 @@
  * @author   Gunnar Wrobel <wrobel@pardus.de>
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Kolab_Session_TestCase extends PHPUnit_Framework_TestCase
+class Horde_Kolab_Session_TestCase extends Horde_Test_Case
 {
     protected function _getComposite()
     {
-        return $this->getMock('Horde_Kolab_Server_Composite', array(), array(), '', false, false);
+        return $this->getMockBuilder('Horde_Kolab_Server_Composite')
+                    ->disableOriginalConstructor()
+                    ->disableOriginalClone()
+                    ->getMock();
     }
 
     protected function _getMockedComposite()
     {
         return new Horde_Kolab_Server_Composite(
-            $this->getMock('Horde_Kolab_Server_Interface'),
-            $this->getMock('Horde_Kolab_Server_Objects_Interface'),
-            $this->getMock('Horde_Kolab_Server_Structure_Interface'),
-            $this->getMock('Horde_Kolab_Server_Search_Interface'),
-            $this->getMock('Horde_Kolab_Server_Schema_Interface')
+            $this->getMockBuilder('Horde_Kolab_Server_Interface')->getMock(),
+            $this->getMockBuilder('Horde_Kolab_Server_Objects_Interface')->getMock(),
+            $this->getMockBuilder('Horde_Kolab_Server_Structure_Interface')->getMock(),
+            $this->getMockBuilder('Horde_Kolab_Server_Search_Interface')->getMock(),
+            $this->getMockBuilder('Horde_Kolab_Server_Schema_Interface')->getMock()
         );
     }
 
     protected function setupLogger()
     {
-        $this->logger = $this->getMock('Horde_Log_Logger');
+        $this->logger = $this->getMockBuilder('Horde_Log_Logger')->getMock();
     }
 
     protected function setupStorage()
     {
-        $this->storage = $this->getMock('Horde_Kolab_Session_Storage');
+        $this->storage = $this->getMockBuilder('Horde_Kolab_Session_Storage')->getMock();
     }
 
     protected function setupFactoryMocks()
     {
         $this->server          = $this->_getMockedComposite();
-        $this->session_storage = $this->getMock('Horde_Kolab_Session_Storage');
+        $this->session_storage = $this->getMockBuilder('Horde_Kolab_Session_Storage')->getMock();
     }
 }

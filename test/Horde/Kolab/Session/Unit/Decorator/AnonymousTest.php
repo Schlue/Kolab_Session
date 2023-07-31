@@ -28,7 +28,7 @@ extends Horde_Kolab_Session_TestCase
 {
     public function testMethodConnectHasPostconditionThatTheConnectionHasBeenEstablishedAsAnonymousUserIfRequired()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('connect')
             ->with('anonymous', array('password' => 'pass'));
@@ -40,7 +40,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testMethodGetidReturnsNullIfConnectedUserIsAnonymousUser()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('getId')
             ->will($this->returnValue('anonymous'));
@@ -52,7 +52,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testMethodConnectGetsDelegated()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('connect')
             ->with(array('password' => 'pass'));
@@ -64,7 +64,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testMethodGetidGetsDelegated()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('getId')
             ->will($this->returnValue('1'));

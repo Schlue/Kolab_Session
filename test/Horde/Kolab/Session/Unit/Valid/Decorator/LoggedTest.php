@@ -26,7 +26,7 @@
 class Horde_Kolab_Session_Unit_Valid_Decorator_LoggedTest
 extends Horde_Kolab_Session_TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -36,7 +36,7 @@ extends Horde_Kolab_Session_TestCase
     public function testMethodValidateHasPostconditionThatAnInvalidSessionGetsLogged()
     {
         $auth = 'auth@example.org';
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->exactly(2))
             ->method('getMail')
             ->will($this->returnValue('somebody@example.org'));
@@ -61,13 +61,13 @@ extends Horde_Kolab_Session_TestCase
 
     public function testMethodValidateGetsDelegated()
     {
-        $valid = $this->getMock('Horde_Kolab_Session_Valid');
+        $valid = $this->getMockBuilder('Horde_Kolab_Session_Valid')->getMock();
         $valid->expects($this->once())
             ->method('validate')
             ->will($this->returnValue(true));
         $valid->expects($this->once())
             ->method('getSession')
-            ->will($this->returnValue($this->getMock('Horde_Kolab_Session')));
+            ->will($this->returnValue($this->getMockBuilder('Horde_Kolab_Session')->getMock()));
         $logged = new Horde_Kolab_Session_Valid_Decorator_Logged(
             $valid, $this->logger
         );
@@ -76,7 +76,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testMethodGetsessionGetsDelegated()
     {
-        $valid = $this->getMock('Horde_Kolab_Session_Valid');
+        $valid = $this->getMockBuilder('Horde_Kolab_Session_Valid')->getMock();
         $valid->expects($this->once())
             ->method('getSession');
         $logged = new Horde_Kolab_Session_Valid_Decorator_Logged($valid, $this->logger);
@@ -85,7 +85,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testMethodGetauthGetsDelegated()
     {
-        $valid = $this->getMock('Horde_Kolab_Session_Valid');
+        $valid = $this->getMockBuilder('Horde_Kolab_Session_Valid')->getMock();
         $valid->expects($this->once())
             ->method('getAuth');
         $logged = new Horde_Kolab_Session_Valid_Decorator_Logged($valid, $this->logger);

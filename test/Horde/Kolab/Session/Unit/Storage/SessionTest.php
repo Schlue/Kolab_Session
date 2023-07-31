@@ -25,12 +25,12 @@
  */
 class Horde_Kolab_Session_Unit_Storage_SessionTest extends Horde_Kolab_Session_TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $_SESSION = array();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($_SESSION['kolab_session']);
     }

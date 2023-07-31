@@ -26,7 +26,7 @@
 class Horde_Kolab_Session_Unit_Decorator_StoredTest
 extends Horde_Kolab_Session_TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -41,7 +41,7 @@ extends Horde_Kolab_Session_TestCase
         $this->storage->expects($this->once())
             ->method('save')
             ->with(array('export'));
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('export')
             ->will($this->returnValue(array('export')));
@@ -50,15 +50,14 @@ extends Horde_Kolab_Session_TestCase
         $stored->shutdown();
     }
 
-    /**
-     * @expectedException Horde_Kolab_Session_Exception
-     */
     public function testImportException()
     {
+        $this->expectException('Horde_Kolab_Session_Exception');
+
         $this->storage->expects($this->once())
             ->method('load')
             ->will($this->returnValue(array()));
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $stored = new Horde_Kolab_Session_Decorator_Stored($session, $this->storage);
         $stored->import(array('import'));
     }
@@ -71,7 +70,7 @@ extends Horde_Kolab_Session_TestCase
         $this->storage->expects($this->once())
             ->method('save')
             ->with(array());
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $stored = new Horde_Kolab_Session_Decorator_Stored($session, $this->storage);
         $stored->purge();
         $stored->shutdown();
@@ -82,7 +81,7 @@ extends Horde_Kolab_Session_TestCase
         $this->storage->expects($this->once())
             ->method('load')
             ->will($this->returnValue(array()));
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('export')
             ->will($this->returnValue(array()));

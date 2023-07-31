@@ -27,6 +27,8 @@ class Horde_Kolab_Session_Unit_ImapTest extends Horde_Kolab_Session_TestCase
 {
     public function testConstruct()
     {
+        $this->expectNotToPerformAssertions();
+
         $session = new Horde_Kolab_Session_Imap(
             new Horde_Kolab_Session_Factory_Imap(), array()
         );
@@ -34,6 +36,8 @@ class Horde_Kolab_Session_Unit_ImapTest extends Horde_Kolab_Session_TestCase
 
     public function testConstructionParameters()
     {
+        $this->expectNotToPerformAssertions();
+
         $session = new Horde_Kolab_Session_Imap(
             new Horde_Kolab_Session_Factory_Imap(),
             array('params' => 'params')

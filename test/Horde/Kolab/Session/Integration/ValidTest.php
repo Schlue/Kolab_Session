@@ -25,11 +25,12 @@
  */
 class Horde_Kolab_Session_Integration_ValidTest extends Horde_Kolab_Session_TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
-        $this->user = $this->getMock(
-            'Horde_Kolab_Server_Object_Hash', array(), array(), '', false, false
-        );
+        $this->user = $this->getMockBuilder('Horde_Kolab_Server_Object_Hash')
+                           ->disableOriginalConstructor()
+                           ->disableOriginalClone()
+                           ->getMock();
     }
 
     public function testMethodIsvalidHasResultBooleanTrueIfTheSessionIsNotConnectedAndTheCurrentUserIsAnonymous()

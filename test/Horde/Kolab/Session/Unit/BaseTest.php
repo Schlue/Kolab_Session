@@ -25,15 +25,18 @@
  */
 class Horde_Kolab_Session_Unit_BaseTest extends Horde_Kolab_Session_TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
-        $this->user = $this->getMock(
-            'Horde_Kolab_Server_Object_Hash', array(), array(), '', false, false
-        );
+        $this->user = $this->getMockBuilder('Horde_Kolab_Server_Object_Hash')
+                           ->disableOriginalConstructor()
+                           ->disableOriginalClone()
+                           ->getMock();
     }
 
     public function testMethodConstructHasParameterServercompositeServer()
     {
+        $this->expectNotToPerformAssertions();
+
         $session = new Horde_Kolab_Session_Base(
             $this->_getComposite(), array()
         );
@@ -41,6 +44,8 @@ class Horde_Kolab_Session_Unit_BaseTest extends Horde_Kolab_Session_TestCase
 
     public function testMethodConstructHasParameterArrayParams()
     {
+        $this->expectNotToPerformAssertions();
+
         $session = new Horde_Kolab_Session_Base(
             $this->_getComposite(), array('params' => 'params')
         );

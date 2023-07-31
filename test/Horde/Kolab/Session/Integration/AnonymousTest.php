@@ -29,9 +29,10 @@ class Horde_Kolab_Session_Integration_AnonymousTest extends Horde_Kolab_Session_
 {
     public function testMethodConnectHasPostconditionThatTheConnectionHasBeenEstablishedAsAnonymousUserIfRequired()
     {
-        $user = $this->getMock(
-            'Horde_Kolab_Server_Object_Hash', array(), array(), '', false, false
-        );
+        $user = $this->getMockBuilder('Horde_Kolab_Server_Object_Hash')
+                     ->disableOriginalConstructor()
+                     ->disableOriginalClone()
+                     ->getMock();
         $user->expects($this->exactly(5))
             ->method('getSingle')
             ->will($this->returnValue('anonymous@example.org'));

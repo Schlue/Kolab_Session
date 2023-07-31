@@ -26,7 +26,7 @@
 class Horde_Kolab_Session_Unit_Decorator_LoggedTest
 extends Horde_Kolab_Session_TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -35,7 +35,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testMethodConnectHasPostconditionThatASuccessfulConnectionGetsLogged()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('connect')
             ->with(array('password' => 'pass'));
@@ -58,7 +58,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testMethodConnectHasPostconditionThatAnUnsuccessfulConnectionGetsLogged()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('connect')
             ->will($this->throwException(new Horde_Kolab_Session_Exception('Error.')));
@@ -85,7 +85,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testExport()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('export')
             ->will($this->returnValue('test'));
@@ -108,7 +108,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testImport()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('import')
             ->with(array('test'));
@@ -131,7 +131,7 @@ extends Horde_Kolab_Session_TestCase
 
     public function testPurge()
     {
-        $session = $this->getMock('Horde_Kolab_Session');
+        $session = $this->getMockBuilder('Horde_Kolab_Session')->getMock();
         $session->expects($this->once())
             ->method('purge');
         $session->expects($this->once())
